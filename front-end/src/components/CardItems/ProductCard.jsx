@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 function ProductCard({ product }) {
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;  
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";   
 
     const handleClick = async(id) => {
-        const res = await fetch(`/api/cart/${id}`, {
+        const res = await fetch(`${backendUrl}/api/cart/add/${id}`, {
             method: 'POST'
         });
         const json = await res.json();

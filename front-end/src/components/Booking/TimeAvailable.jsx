@@ -7,13 +7,13 @@ function TimeAvailable() {
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
     const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;  
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";   
 
     useEffect(() => {
         const fetchAvailableSlots = async () => {
             if (selectedDate) {
                 try {
-                    const response = await fetch(`/api/appointments/time-available?date=${selectedDate.toISOString().split('T')[0]}`);
+                    const response = await fetch(`${backendUrl}/api/appointments/time-available?date=${selectedDate.toISOString().split('T')[0]}`);
                     if (response.ok) {
                         const data = await response.json();
                         setAvailableTimeSlots(data.slots);
@@ -52,7 +52,7 @@ function TimeAvailable() {
             };
 
             try {
-                const response = await fetch('/api/appointments/appointment', {
+                const response = await fetch(`${backendUrl}/api/appointments`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

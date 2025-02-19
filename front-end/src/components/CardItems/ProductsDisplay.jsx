@@ -9,23 +9,23 @@ function ProductsDisplay() {
     const [carts, setCarts] = useState(null);
     const [totalPrice, setTotalPrice] = useState(null);
     const {currentUser, loading, error } = useSelector(state => state.user);
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;  
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";   
 
 
     const fetchProduct = async() =>{
-        const res = await fetch(`/api/inventory`);
+        const res = await fetch(`${backendUrl}/api/inventory`);
         const json = await res.json();
         setProducts(json);
         console.log(products);
     };
     const fetchCart = async() =>{
-        const res = await fetch(`/api/cart/show`);
+        const res = await fetch(`${backendUrl}/api/cart/show`);
         const json = await res.json();
         setCarts(json);
         console.log(carts);
     };
     const fetchTotalPrice = async() =>{
-        const res = await fetch(`/api/cart/totalPrice`);
+        const res = await fetch(`${backendUrl}/api/cart/totalPrice`);
         const json = await res.json();
         setTotalPrice(json.totalPrice);
         console.log(totalPrice);
@@ -38,7 +38,7 @@ function ProductsDisplay() {
     },[carts]);
 
     const addItem = async(id) => {
-        const res = await fetch(`/api/cart/editAdd/${id}`,{
+        const res = await fetch(`${backendUrl}/api/cart/editAdd/${id}`,{
             method: 'PUT'
         });
         const json = await res.json();
@@ -46,7 +46,7 @@ function ProductsDisplay() {
     }
 
     const minusItem = async(id) => {
-        const res = await fetch(`/api/cart/editMinus/${id}`,{
+        const res = await fetch(`${backendUrl}/api/cart/editMinus/${id}`,{
             method: 'PUT'
         });
         const json = await res.json();
@@ -54,7 +54,7 @@ function ProductsDisplay() {
     }
 
     const checkout = async() => {
-        const res = await fetch(`/api/cart/checkout/${currentUser.email}`,{
+        const res = await fetch(`${backendUrl}/api/cart/checkout/${currentUser.email}`,{
             method: 'POST'
         });
         const json = await res.json();

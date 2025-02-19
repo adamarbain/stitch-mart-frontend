@@ -10,13 +10,13 @@ function FinancialRecords() {
   const [expenses, setExpenses] = useState([]);
   const [revenue, setRevenue] = useState(0); 
   const [totalIncome, setTotalIncome] = useState(0);
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;  
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";   
 
   // useEffect to fetch payment data from the database
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const response = await fetch('/api/payments');
+        const response = await fetch(`${backendUrl}/api/payments`);
         const paymentData = await response.json();
         setPayments(paymentData);
       } catch (error) {

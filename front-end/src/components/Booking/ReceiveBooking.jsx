@@ -5,12 +5,12 @@ function ReceiveBooking() {
     const [bookings, setBookings] = useState([]);
     const [selectedBooking, setSelectedBooking] = useState(null);
     const [invoice, setInvoice] = useState(null);
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;  
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";   
 
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                const response = await fetch('/api/bookings');
+                const response = await fetch(`${backendUrl}/api/bookings`);
                 if (response.ok) {
                     const data = await response.json();
                     setBookings(data);
@@ -27,7 +27,7 @@ function ReceiveBooking() {
 
     const handleGenerateInvoice = async (bookingId, bookingEmail) => {
         try {
-            const response = await fetch(`/api/invoices/generate`, {
+            const response = await fetch(`${backendUrl}/api/bookings/invoice`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

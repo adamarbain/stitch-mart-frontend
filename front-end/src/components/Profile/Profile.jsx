@@ -29,7 +29,7 @@ const Profile = () => {
   const [imageError, setImageError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;  
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";   
 
   const { currentUser, loading, error } = useSelector((state) => state.user);
 
@@ -69,7 +69,7 @@ const Profile = () => {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
-      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`${backendUrl}/api/user/update/${currentUser._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +91,7 @@ const Profile = () => {
   const handleDeleteAccount = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+      const res = await fetch(`${backendUrl}/api/user/delete/${currentUser._id}`, {
         method: "DELETE",
       });
       const data = await res.json();
@@ -107,7 +107,7 @@ const Profile = () => {
 
   const handleSignOut = async () => {
     try {
-      await fetch("/api/auth/signout");
+      await fetch(`${backendUrl}/api/auth/signout`);
       dispatch(signOut());
     } catch (error) {
       console.log(error);

@@ -14,7 +14,7 @@ function Booking() {
     });
 
     let nav = useNavigate();
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;  
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";   
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -43,7 +43,7 @@ function Booking() {
         }
 
         try {
-            const response = await fetch('/api/bookings', {
+            const response = await fetch(`${backendUrl}/api/bookings`, {
                 method: 'POST',
                 body: data,
             });

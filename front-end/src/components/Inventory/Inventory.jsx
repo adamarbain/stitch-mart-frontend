@@ -10,7 +10,7 @@ function Inventory() {
     const [editType, setEditType] = useState('Add');
     const [productName, setProductName] = useState('');
     const [quantity, setQuantity] = useState(1);
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;  
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";   
 
     const goToHome = () => {
         navigate('/');
@@ -22,7 +22,7 @@ function Inventory() {
     }, []);
 
     const fetchProduct = async () => {
-        const res = await fetch(`/api/inventory`);
+        const res = await fetch(`${backendUrl}/api/inventory`);
         const json = await res.json();
         setProducts(json);
         console.log('Inventory fetched', json);
@@ -45,7 +45,7 @@ function Inventory() {
         }
 
         try {
-            const res = await fetch(`/api/inventory/${productToUpdate._id}`, {
+            const res = await fetch(`${backendUrl}/api/inventory/${productToUpdate._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

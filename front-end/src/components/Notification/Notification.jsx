@@ -9,7 +9,7 @@ function Notification() {
     const [noti,setNoti] = useState(null);
     const [notiCount,setNotiCount] = useState(0);
     const [read, setRead] = useState(false);
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;  
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";   
 
     const {currentUser, loading, error } = useSelector(state => state.user);
 
@@ -18,7 +18,7 @@ function Notification() {
     },[read]);
 
     const handleReadAllClick = async() => {
-        const res = await fetch(`/api/notification/markRead/${currentUser.email}`, {
+        const res = await fetch(`${backendUrl}/api/notification/markRead/${currentUser.email}`, {
             method: 'PUT',
           });
         if(res.ok){
@@ -31,7 +31,7 @@ function Notification() {
     }
 
     // const handleMessageClick = async(id) => {
-    //     const res = await fetch(`/api/notification/markRead/${id}`, {
+    //     const res = await fetch(`${backendUrl}/api/notification/markRead/${id}`, {
     //         method: 'PUT',
     //       });
     //     if(res.ok){
@@ -44,7 +44,7 @@ function Notification() {
 
     const handleAllClick = async() => {
             setTitle('All');
-            const res = await fetch(`/api/notification/show/${currentUser.email}`);
+            const res = await fetch(`${backendUrl}/api/notification/show/${currentUser.email}`);
             const json = await res.json();
             setNoti(json);
             setNotiCount(json.length);
@@ -53,7 +53,7 @@ function Notification() {
 
     const handleUnreadClick = async()=> {
             setTitle('Unread');
-            const res = await fetch(`/api/notification/unread/${currentUser.email}`);
+            const res = await fetch(`${backendUrl}/api/notification/unread/${currentUser.email}`);
             const json = await res.json();
             setNoti(json);
             setNotiCount(json.length);
@@ -62,7 +62,7 @@ function Notification() {
 
     const handleInventoryClick = async() => {
         setTitle('Low Inventory Alert');
-        const res = await fetch(`/api/notification/inventory/${currentUser.email}`);
+        const res = await fetch(`${backendUrl}/api/notification/inventory/${currentUser.email}`);
         const json = await res.json();
         setNoti(json);
         setNotiCount(json.length);
@@ -71,7 +71,7 @@ function Notification() {
 
     const handleOrderClick = async()=> {
         setTitle('Order Update');
-        const res = await fetch(`/api/notification/order/${currentUser.email}`);
+        const res = await fetch(`${backendUrl}/api/notification/order/${currentUser.email}`);
         const json = await res.json();
         setNoti(json);
         setNotiCount(json.length);
@@ -80,7 +80,7 @@ function Notification() {
 
     const handleAppointmentClick = async()=> {
         setTitle('Appointment');
-        const res = await fetch(`/api/notification/appointment/${currentUser.email}`);
+        const res = await fetch(`${backendUrl}/api/notification/appointment/${currentUser.email}`);
         const json = await res.json();
         setNoti(json);
         setNotiCount(json.length);
@@ -89,7 +89,7 @@ function Notification() {
 
     useEffect(() => {
         const fetchNotif = async() =>{
-            const res = await fetch(`/api/notification/show/${currentUser.email}`);
+            const res = await fetch(`${backendUrl}/api/notification/show/${currentUser.email}`);
             const json = await res.json();
             setNoti(json);
             setNotiCount(json.length);
