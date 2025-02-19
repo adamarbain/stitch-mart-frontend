@@ -10,6 +10,7 @@ function OrderManagement() {
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;  
 
   useEffect(() => {
     const fetchData = async () => {

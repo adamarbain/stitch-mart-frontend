@@ -9,6 +9,7 @@ function ProductsDisplay() {
     const [carts, setCarts] = useState(null);
     const [totalPrice, setTotalPrice] = useState(null);
     const {currentUser, loading, error } = useSelector(state => state.user);
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;  
 
 
     const fetchProduct = async() =>{

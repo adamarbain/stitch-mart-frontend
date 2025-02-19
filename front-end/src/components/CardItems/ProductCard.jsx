@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function ProductCard({ product }) {
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;  
 
     const handleClick = async(id) => {
         const res = await fetch(`/api/cart/${id}`, {

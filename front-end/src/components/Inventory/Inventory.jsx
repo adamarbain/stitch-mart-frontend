@@ -10,6 +10,7 @@ function Inventory() {
     const [editType, setEditType] = useState('Add');
     const [productName, setProductName] = useState('');
     const [quantity, setQuantity] = useState(1);
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;  
 
     const goToHome = () => {
         navigate('/');

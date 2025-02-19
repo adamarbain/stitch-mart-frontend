@@ -16,6 +16,7 @@ function SignUp() {
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3001";  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -24,7 +25,7 @@ function SignUp() {
     e.preventDefault();
     try {
       dispatch(signUpStart());
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch(`${backendUrl}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -10,6 +10,7 @@ function FinancialRecords() {
   const [expenses, setExpenses] = useState([]);
   const [revenue, setRevenue] = useState(0); 
   const [totalIncome, setTotalIncome] = useState(0);
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;  
 
   // useEffect to fetch payment data from the database
   useEffect(() => {

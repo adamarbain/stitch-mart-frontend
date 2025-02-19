@@ -7,6 +7,7 @@ function TimeAvailable() {
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
     const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;  
 
     useEffect(() => {
         const fetchAvailableSlots = async () => {

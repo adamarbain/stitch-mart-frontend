@@ -16,6 +16,7 @@ const Login = ({ setUser }) => {
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });

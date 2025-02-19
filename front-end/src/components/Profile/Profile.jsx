@@ -29,6 +29,7 @@ const Profile = () => {
   const [imageError, setImageError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;  
 
   const { currentUser, loading, error } = useSelector((state) => state.user);
 

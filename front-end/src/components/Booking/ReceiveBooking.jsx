@@ -5,6 +5,7 @@ function ReceiveBooking() {
     const [bookings, setBookings] = useState([]);
     const [selectedBooking, setSelectedBooking] = useState(null);
     const [invoice, setInvoice] = useState(null);
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;  
 
     useEffect(() => {
         const fetchBookings = async () => {

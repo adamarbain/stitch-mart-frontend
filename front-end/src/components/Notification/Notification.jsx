@@ -9,6 +9,7 @@ function Notification() {
     const [noti,setNoti] = useState(null);
     const [notiCount,setNotiCount] = useState(0);
     const [read, setRead] = useState(false);
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;  
 
     const {currentUser, loading, error } = useSelector(state => state.user);
 
