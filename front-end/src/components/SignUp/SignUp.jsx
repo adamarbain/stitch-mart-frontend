@@ -24,7 +24,7 @@ function SignUp() {
     e.preventDefault();
     try {
       dispatch(signUpStart());
-      const res = await fetch("https://stitch-mart-backend.onrender.com/api/auth/signup", {
+      const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

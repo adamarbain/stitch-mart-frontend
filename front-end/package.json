@@ -51,5 +51,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://stitch-mart-backend.onrender.com"
+  "proxy": [
+    "https://stitch-mart-backend.onrender.com",
+    "http://localhost:3001"
+  ]
 }
