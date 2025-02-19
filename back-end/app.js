@@ -29,10 +29,13 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://adam:adam@cluster0.7x
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-  origin: 'https://stitch-mart-backend.onrender.com', // Your frontend's URL
-  credentials: true // This allows the frontend to include cookies in requests
-}));
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://stitch-mart-frontend.vercel.app"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // If using cookies/authentication
+  })
+);
 app.use(cookieParser());
 
 app.listen(3001, () => {
